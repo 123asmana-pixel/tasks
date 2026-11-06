@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>تحدي تطوير الويب | 20 سؤال تفاعلي للمحاضرة</title>
+  <style>
+    :root { color-scheme:dark; --bg:#080e26; --panel:#121b38; --panel2:#192446; --muted:#a9b7d5; --text:#f9fbff; --blue:#5b91ff; --cyan:#53e2ed; --violet:#a987ff; --green:#43df9f; --red:#ff6b86; --border:rgba(179,206,255,.2); }
+    * { box-sizing:border-box; }
+    html, body { margin:0; min-height:100%; font-family:Tahoma,"Segoe UI",Arial,sans-serif; }
+    body { background: radial-gradient(ellipse 65% 65% at 100% 0%,rgba(80,65,179,.27),transparent 70%),radial-gradient(ellipse 56% 72% at 0% 100%,rgba(30,139,196,.23),transparent 65%),var(--bg); color:var(--text); overflow-x:hidden; }
+    body:before {content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:radial-gradient(#93b9ff 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to bottom,black,transparent 72%)}
+    .page { max-width:1400px;min-height:100dvh;margin:auto;padding:clamp(16px,2.7vw,42px) clamp(14px,3.2vw,48px);display:flex;flex-direction:column;gap:clamp(13px,2vw,30px);position:relative; }
+    .top { display:flex;justify-content:space-between;align-items:center;gap:16px; }
+    .brand {display:flex;align-items:center;gap:12px;font-size:clamp(17px,1.7vw,24px);font-weight:800;}
+    .mark {width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#5f70fa,#24cddd);display:grid;place-items:center;font-size:28px;box-shadow:0 8px 30px #438bfc3a;}
+    .badge {font-size:clamp(12px,1vw,15px);border:1px solid var(--border);border-radius:100px;background:#ffffff0d;padding:9px 17px;color:#dae8ff;}
+    .panel { flex:1;display:flex;flex-direction:column;justify-content:center;align-items:stretch; gap:18px; }
+    .intro {text-align:center;margin:auto;max-width:970px;}
+    .eyebrow {color:#68efff;letter-spacing:.4px;font-size:clamp(16px,1.7vw,25px);font-weight:800;margin:10px 0 16px;}
+    h1 {font-size:clamp(38px,5.3vw,76px);line-height:1.25;letter-spacing:-1.5px;margin:0 0 22px;}
+    .grad {background:linear-gradient(100deg,#83f4f6,#82a8ff,#bb9bff);-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .subtitle {color:#c8d6f3;font-size:clamp(17px,1.9vw,26px);line-height:1.95;max-width:800px;margin:0 auto 30px;}
+    .hint {display:flex;flex-wrap:wrap;justify-content:center;gap:14px;color:#c7d6f5;font-size:clamp(14px,1.25vw,17px);margin-top:22px;}
+    .hint span {background:#ffffff0e;border:1px solid var(--border);border-radius:12px;padding:10px 14px;}
+    .mainbutton {border:0;border-radius:17px;color:#08142b;font-weight:900;font-family:inherit;font-size:clamp(19px,1.7vw,25px);background:linear-gradient(105deg,#64f0ed,#85a8ff);padding:18px 34px;cursor:pointer;box-shadow:0 14px 35px #15bfd324;}
+    .mainbutton:hover {filter:brightness(1.1);transform:translateY(-2px);}
+    button {transition:transform .16s ease,background .15s,border-color .15s;}
+    button:focus-visible {outline:3px solid #9cf4ff;outline-offset:3px;}
+    .outline {border:1px solid #ffffff4a;border-radius:14px;padding:14px 22px;color:#eaf4ff;background:#ffffff0a;font:700 clamp(16px,1.3vw,19px) Tahoma,Arial,sans-serif;cursor:pointer;}
+    .outline:hover {background:#ffffff1d;}
+    .outline:disabled {opacity:.35;cursor:not-allowed;}
+    .quizhead {display:flex;align-items:center;justify-content:space-between;gap:15px;color:#c0d0ef; font-size:clamp(16px,1.5vw,21px);font-weight:bold;}
+    .tag {background:#2f3478;border:1px solid #8386ee;border-radius:60px;padding:10px 20px;color:white;}
+    .progress {display:flex;gap:9px;direction:rtl;}
+    .progress .seg {flex:1;height:10px;background:#283458;border-radius:10px;overflow:hidden;}
+    .progress .seg.active {background:linear-gradient(90deg,#5bcdf8,#997eff);}
+    .progress .seg.done {background:#577bba;}
+    .question {font-size:clamp(30px,3.4vw,49px);font-weight:900;line-height:1.5;margin:5px 0 12px;}
+    .answers {display:grid;grid-template-columns:1fr;gap:clamp(12px,1.55vw,22px);}
+    .answer {width:100%;min-height:clamp(70px,8vw,104px);text-align:right;padding:clamp(12px,1.5vw,22px) clamp(15px,2vw,28px);border:2px solid #415174;border-radius:20px;background:linear-gradient(115deg,#172244,#192447);color:white;display:flex;align-items:center;gap:clamp(15px,1.9vw,26px);font:700 clamp(21px,2.15vw,32px) Tahoma,Arial,sans-serif;cursor:pointer;}
+    .letter {width:clamp(42px,4vw,57px);height:clamp(42px,4vw,57px);border-radius:13px;background:#334267;color:#e9f3ff;display:grid;place-items:center;font-family:Arial,sans-serif;font-weight:800;direction:ltr;flex-shrink:0;}
+    .answer:hover:not(:disabled){border-color:#75b6ff;background:#253358;transform:translateY(-2px)}
+    .answer.selected:not(.correct):not(.wrong){border-color:#76b6ff;background:#223660;box-shadow:inset 5px 0 0 #6ab8ff;}
+    .answer.correct{border-color:var(--green);background:linear-gradient(110deg,#0b4038,#1d3a50);}
+    .answer.correct .letter{background:var(--green);color:#062c26;}
+    .answer.wrong{border-color:var(--red);background:linear-gradient(110deg,#4d2039,#26243d);}
+    .answer.wrong .letter{background:var(--red);color:#3c0a20;}
+    .answer:disabled {cursor:default;}
+    .feedback{border:1px solid #77d8c391;background:#0b49405c;border-radius:17px;padding:clamp(14px,1.3vw,20px) clamp(16px,1.7vw,25px);font-size:clamp(17px,1.5vw,23px);line-height:1.65;color:#e9fff8;}
+    .feedback strong{color:#6ef6c3;}
+    .controls {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:6px;}
+    .rightcontrols {display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+    .footer {display:flex;align-items:center;justify-content:space-between;gap:10px;color:#a6b8d8;font-size:clamp(12px,1vw,15px);}
+    .footer button{cursor:pointer;background:none;border:0;color:#aed4ff;font:inherit;text-decoration:underline;}
+    .final {max-width:950px;text-align:center;margin:auto;}
+    .final .big {font-size:clamp(76px,11vw,154px);margin:0 0 8px;}
+    .final h2 {font-size:clamp(36px,4.5vw,64px);line-height:1.3;margin:0 0 20px;}
+    .final p {font-size:clamp(19px,2vw,28px);line-height:1.8;color:#c9d8f1;}
+    .score {border:1px solid #4b69a4;background:#152143;border-radius:20px;padding:18px 28px;display:inline-block;margin-bottom:25px;font-size:clamp(18px,2vw,28px);}
+    .hidden {display:none !important;}
+    @media (max-width:640px){.page{gap:16px}.top{align-items:flex-start}.brand{font-size:17px}.mark{width:39px;height:39px;font-size:23px}.badge{font-size:11px;padding:9px 10px}.footer{flex-wrap:wrap}.question{margin:14px 0}.hint{gap:7px}.answer{line-height:1.5}.controls{justify-content:center}.rightcontrols{width:100%}.rightcontrols button{flex:1}.quizhead{font-size:15px}}
+    @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+  </style>
+</head>
+<body>
+ <main class="page">
+   <header class="top">
+     <div class="brand"><div class="mark">✦</div><span>تحدّي تطوير الويب</span></div>
+     <span class="badge">HTML • CSS • JavaScript • UI/UX</span>
+   </header>
+   <section class="panel" id="intro">
+     <div class="intro">
+       <p class="eyebrow">🎯 جاهزين نختبر معلوماتنا؟</p>
+       <h1>مين فيكم هيبقى <span class="grad">نجم المحاضرة؟</span></h1>
+       <p class="subtitle">٢٠ سؤال سهل للمبتدئين: هنراجع HTML وCSS وJavaScript، ونفهم الفرق بين Front-End وBack-End، ونراجع UI/UX ومراحل بناء الموقع. اختاروا الإجابة مع بعض، وبعدها نكشف الإجابة الصح ونفهم السبب.</p>
+       <button class="mainbutton" id="startBtn">ابدأ التحدّي ←</button>
+       <div class="hint"><span>📚 ٤ محاور · ٢٠ سؤال</span><span>👥 مناسب للعرض على البروجيكتور</span><span>🎮 اضغط A / B / C للاختيار</span><span>⛶ زر ملء الشاشة أسفل الصفحة</span></div>
+     </div>
+   </section>
+   <section class="panel hidden" id="quiz" aria-live="polite">
+     <div class="quizhead"><span class="tag" id="counter">السؤال ١ من ٢٠</span><span id="topic">تجربة المستخدم</span></div>
+     <div class="progress" id="progress" aria-hidden="true"></div>
+     <h2 class="question" id="question"></h2>
+     <div class="answers" id="answers"></div>
+     <div class="feedback hidden" id="feedback"></div>
+     <div class="controls">
+       <div class="rightcontrols">
+         <button class="mainbutton" id="revealBtn">إظهار الإجابة الصحيحة ✓</button>
+         <button class="mainbutton hidden" id="nextBtn">السؤال التالي ←</button>
+       </div>
+       <button class="outline" id="prevBtn">→ السؤال السابق</button>
+     </div>
+   </section>
+   <section class="panel hidden" id="end">
+     <div class="final">
+       <div class="big">🏆</div>
+       <h2>برافو عليكم يا أبطال!</h2>
+       <p>خلصنا تحدّي <strong>تطوير الويب</strong>! دلوقتي عرفنا وظيفة HTML وCSS وJavaScript، والفرق بين Front-End وBack-End، وإزاي بنمشي من الفكرة لحد نشر الموقع.</p>
+       <div class="score" id="score"></div>
+       <div><button class="mainbutton" id="restartBtn">إعادة المسابقة ↻</button></div>
+     </div>
+   </section>
+   <footer class="footer"><span>مسابقة تعليمية للمبتدئين • من أول فكرة الموقع لحد النشر 🚀</span><span><button id="fullscreenBtn" title="تبديل ملء الشاشة">⛶ ملء الشاشة</button> · بدون إنترنت أو تثبيت برامج</span></footer>
+ </main>
+ <script>
+ (() => {
+   'use strict';
+   const questions = [
+     // المحور ١: أساسيات HTML وCSS وJavaScript
+     { topic:'١ • أساسيات الويب | HTML', q:'إيه الوظيفة الأساسية للـ HTML في الموقع؟', options:['بناء وترتيب محتوى الصفحة','تغيير ألوان الصفحة فقط','حفظ بيانات المستخدمين'], correct:0, why:'HTML بتحدد هيكل ومحتوى صفحة الويب، زي العناوين والفقرات والصور والروابط.' },
+     { topic:'١ • أساسيات الويب | CSS', q:'لو عايزين نغيّر لون زرار أو شكل الخط في الموقع، هنستخدم إيه؟', options:['HTML','CSS','قاعدة البيانات'], correct:1, why:'CSS مسؤولة عن تنسيق شكل الموقع: الألوان والخطوط والمسافات وترتيب العناصر.' },
+     { topic:'١ • أساسيات الويب | JavaScript', q:'مين اللي بيخلّي زرار في الموقع يعمل حاجة لما نضغط عليه؟', options:['JavaScript','CSS فقط','اسم الدومين'], correct:0, why:'JavaScript بتضيف التفاعل والسلوك للصفحة، زي فتح قائمة أو عرض رسالة عند الضغط.' },
+     { topic:'١ • أساسيات الويب', q:'إيه أشهر ٣ تقنيات بنبدأ بيهم في الـ Front-End؟', options:['Python وSQL وJava','HTML وCSS وJavaScript','Photoshop وWord وExcel'], correct:1, why:'HTML لبناء المحتوى، وCSS للشكل، وJavaScript للتفاعل. دول أساس تطوير واجهات الويب.' },
+     { topic:'١ • أساسيات الويب', q:'لو إنت لسه مبتدئ، إيه ترتيب مناسب لتعلّم أساسيات Front-End؟', options:['JavaScript ثم CSS ثم HTML','HTML ثم CSS ثم JavaScript','Backend ثم Database ثم HTML'], correct:1, why:'البداية الشائعة والأسهل: نفهم هيكل الصفحة بـ HTML، ثم تنسيقها بـ CSS، وبعدها نضيف التفاعل بـ JavaScript.' },
+
+     // المحور ٢: Front-End وBack-End
+     { topic:'٢ • Front-End', q:'الـ Front-End هو الجزء اللي…', options:['المستخدم بيشوفه وبيتعامل معاه','بيخزّن بيانات الموقع بس','بيصلّح شبكة الإنترنت'], correct:0, why:'Front-End هي واجهة الموقع اللي بتظهر في المتصفح: الصور والأزرار والقوائم والمحتوى.' },
+     { topic:'٢ • Back-End', q:'الـ Back-End بيعمل إيه غالبًا؟', options:['يختار لون الأزرار','يعالج الطلبات وينفّذ منطق الموقع على السيرفر','يرسم أيقونات الموقع فقط'], correct:1, why:'Back-End بيتعامل مع العمليات اللي بتتم وراء الواجهة، زي معالجة طلب تسجيل الدخول والتعامل مع البيانات.' },
+     { topic:'٢ • Front-End vs Back-End', q:'إيه الفرق الأساسي بين Front-End وBack-End؟', options:['الاتنين مسؤولين عن شكل الصفحة بس','Front-End للواجهة وBack-End للعمليات وراءها','Front-End للإنترنت وBack-End للكهرباء'], correct:1, why:'الـ Front-End بيعرض الواجهة ويدير تفاعل المستخدم، والـ Back-End بيعالج العمليات والبيانات على السيرفر.' },
+     { topic:'٢ • قواعد البيانات', q:'بيانات المستخدمين والطلبات بتتخزّن غالبًا فين؟', options:['في لون الموقع','في قاعدة بيانات (Database)','في صورة اللوجو'], correct:1, why:'قواعد البيانات مخصصة لتنظيم وتخزين البيانات، والـ Back-End غالبًا بيتعامل معاها بشكل آمن.' },
+     { topic:'٢ • Front-End Developer', q:'مين المسؤول عن تحويل التصميم لواجهة موقع تفاعلية؟', options:['Front-End Developer','Database Administrator','Network Engineer'], correct:0, why:'مطور الـ Front-End بيحوّل التصميم لواجهة بتشتغل في المتصفح، وبيبرمج تفاعل المستخدم معاها.' },
+     { topic:'٢ • المتصفح والسيرفر', q:'لما الموقع يحتاج بيانات من السيرفر، المتصفح بيعمل إيه؟', options:['بيبعت طلب (Request)','بيطفي الجهاز','بيغيّر شكل الشاشة تلقائيًا'], correct:0, why:'المتصفح أو تطبيق الواجهة بيبعت Request للسيرفر، والسيرفر بيرجع Response فيه النتيجة أو البيانات المطلوبة.' },
+
+     // المحور ٣: UI وUX
+     { topic:'٣ • UI vs UX', q:'هل الـ UI والـ UX نفس الحاجة؟', options:['أيوه، مفيش فرق','لأ، الـ UI الواجهة والـ UX التجربة','الـ UX خاص بالألوان'], correct:1, why:'الـ UI بيركّز على شكل وعناصر الواجهة، أما الـ UX فبيركّز على تجربة المستخدم وسهولة تحقيق هدفه.' },
+     { topic:'٣ • تجربة المستخدم', q:'لو الموقع جميل بس صعب في الاستخدام، المشكلة غالبًا فين؟', options:['في سرعة الإنترنت فقط','في UX','في اسم الموقع'], correct:1, why:'الجمال مش كفاية لوحده؛ تجربة المستخدم لازم تساعد الزائر يوصل للي عايزه بسهولة ووضوح.' },
+     { topic:'٣ • Responsive Design', q:'يعني إيه Responsive Design؟', options:['الموقع بيشتغل من غير إنترنت','تصميم بيتكيف مع أحجام الشاشات','الموقع لازم يكون كله صور'], correct:1, why:'التصميم المتجاوب بيغيّر ترتيب وأحجام العناصر علشان الصفحة تبقى مناسبة للموبايل والتابلت والكمبيوتر.' },
+     { topic:'٣ • UI Design', q:'أنهي مثال من دول يُعتبر جزء من تصميم الـ UI؟', options:['لون الزرار وشكل الخط','حفظ كلمة المرور في قاعدة بيانات','تشغيل السيرفر'], correct:0, why:'الـ UI بيشمل العناصر اللي المستخدم بيشوفها: الأزرار والخطوط والألوان والأيقونات وترتيب الواجهة.' },
+
+     // المحور ٤: رحلة بناء الموقع
+     { topic:'٤ • مراحل إنشاء المواقع', q:'إيه أفضل ترتيب منطقي لبناء موقع جديد؟', options:['نشر ثم تصميم ثم فكرة','فكرة ثم تصميم ثم تطوير ثم اختبار ونشر','اختبار قبل تحديد فكرة الموقع'], correct:1, why:'بنبدأ بفهم الفكرة والهدف والجمهور، ثم التصميم، فالتطوير، وبعدها الاختبار والنشر.' },
+     { topic:'٤ • الفكرة', q:'في مرحلة الفكرة، أول حاجة بنحددها إيه؟', options:['هدف الموقع ومين هيستخدمه','لون كل زرار بالتفصيل','اسم آخر ملف برمجي'], correct:0, why:'قبل التصميم والبرمجة لازم نعرف الموقع هيحل مشكلة إيه، ومين الجمهور المستهدف.' },
+     { topic:'٤ • التصميم', q:'في مرحلة التصميم بنجهز إيه؟', options:['شكل الصفحات وطريقة تنقّل المستخدم بينها','فاتورة الإنترنت','نسخة نهائية من السيرفر فقط'], correct:0, why:'بنرتب الشاشات والعناصر والألوان ومسار المستخدم، وممكن نعمل Wireframe أو Prototype.' },
+     { topic:'٤ • الاختبار', q:'ليه بنختبر الموقع قبل ما ننشره؟', options:['علشان نكتشف الأخطاء ونتأكد إنه شغال','علشان نلغي جميع الصفحات','علشان نمنع أي حد يستخدمه'], correct:0, why:'الاختبار بيكشف مشاكل الأزرار والروابط والعرض على الشاشات المختلفة، وبيساعدنا نصلّحها قبل النشر.' },
+     { topic:'٤ • النشر', q:'معنى «نشر الموقع» إيه؟', options:['نخلي الموقع متاح للناس على الإنترنت','نمسح ملفات الموقع','نحوّل الصفحة لصورة بس'], correct:0, why:'في مرحلة النشر بنرفع الموقع على استضافة مناسبة ونخليه متاح للزوار عبر رابط، وقد نربط له دومين.' }
+   ];
+   const $ = (id) => document.getElementById(id);
+   const arabicNumeral = (num) => String(num).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[Number(d)]);
+   let index = 0;
+   let picks = Array(questions.length).fill(null);
+   let revealed = Array(questions.length).fill(false);
+   const allViews = ['intro','quiz','end'];
+   function view(name) { allViews.forEach(id => $(id).classList.toggle('hidden', id !== name)); }
+   function render() {
+     view('quiz');
+     const q = questions[index];
+     $('counter').textContent = `السؤال ${arabicNumeral(index + 1)} من ${arabicNumeral(questions.length)}`;
+     $('topic').textContent = q.topic;
+     $('question').textContent = q.q;
+     $('progress').replaceChildren(...questions.map((_,i) => {
+        const e=document.createElement('div');e.className='seg '+(i<index?'done':(i===index?'active':''));return e;
+     }));
+     const host = $('answers'); host.replaceChildren();
+     q.options.forEach((option,i) => {
+       const btn = document.createElement('button');
+       btn.type = 'button';
+       btn.className = 'answer';
+       if (revealed[index]) {
+         if(i === q.correct) btn.classList.add('correct');
+         else if(i === picks[index]) btn.classList.add('wrong');
+       } else if (picks[index] === i) btn.classList.add('selected');
+       btn.disabled = revealed[index];
+       const letter = document.createElement('span');letter.className='letter';letter.textContent='ABC'[i];
+       const label = document.createElement('span');label.textContent=option;
+       btn.append(letter,label);
+       btn.addEventListener('click', () => {if(!revealed[index]){picks[index]=i;render();}});
+       host.appendChild(btn);
+     });
+     $('feedback').classList.toggle('hidden', !revealed[index]);
+     if(revealed[index]){
+       $('feedback').replaceChildren();
+       const title = document.createElement('strong');title.textContent='✅ الإجابة الصح: '+q.options[q.correct];
+       const desc = document.createElement('div');desc.textContent='السبب: '+q.why;
+       $('feedback').append(title,desc);
+     }
+     $('revealBtn').classList.toggle('hidden',revealed[index]);
+     $('nextBtn').classList.toggle('hidden',!revealed[index]);
+     $('nextBtn').textContent = index===questions.length-1 ? 'عرض ختام المسابقة ←' : 'السؤال التالي ←';
+     $('prevBtn').disabled=index===0;
+   }
+   function reveal(){ revealed[index]=true;render(); }
+   function next(){ if(!revealed[index]) return; if(index<questions.length-1){index++;render();} else showEnd(); }
+   function showEnd(){
+     view('end');
+     const selected = picks.filter(p=>p!==null).length;
+     const correct = picks.filter((p,i)=>p===questions[i].correct).length;
+     $('score').textContent= selected ? `إجابات الجمهور الصحيحة: ${arabicNumeral(correct)} من ${arabicNumeral(selected)} اختيارات` : 'شكرًا على المشاركة والتفاعل!';
+   }
+   function restart(){index=0;picks=Array(questions.length).fill(null);revealed=Array(questions.length).fill(false);view('intro');}
+   $('startBtn').addEventListener('click',render);
+   $('revealBtn').addEventListener('click',reveal);
+   $('nextBtn').addEventListener('click',next);
+   $('prevBtn').addEventListener('click',()=>{if(index>0){index--;render();}});
+   $('restartBtn').addEventListener('click',restart);
+   $('fullscreenBtn').addEventListener('click',async()=>{
+     try { if(!document.fullscreenElement) await document.documentElement.requestFullscreen();else await document.exitFullscreen(); }
+     catch(e) { alert('اضغط F11 من لوحة المفاتيح لعرض الصفحة بملء الشاشة.'); }
+   });
+   document.addEventListener('keydown',(event)=>{
+     const k=event.key.toLowerCase();
+     if(!($('quiz').classList.contains('hidden'))){
+       if(['a','b','c','1','2','3'].includes(k)&&!revealed[index]){const n='abc'.includes(k)?'abc'.indexOf(k):Number(k)-1;picks[index]=n;render();}
+       if(k==='enter'||k===' '){event.preventDefault();if(!revealed[index])reveal();else next();}
+       if(k==='arrowleft'&&revealed[index])next();
+       if(k==='arrowright'&&index>0){index--;render();}
+     } else if(!$('intro').classList.contains('hidden')&&k==='enter'){render();}
+     if(k==='f'&&!event.ctrlKey&&!event.metaKey){ $('fullscreenBtn').click(); }
+   });
+ })();
+ </script>
+</body>
+</html>
